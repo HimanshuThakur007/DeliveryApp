@@ -1,0 +1,76 @@
+.header-ct-main{
+    background: #009999;
+    height: 100%;
+}
+
+
+
+.login-btn{
+    border: none;
+    outline: none;
+    padding: 5px 25px 5px 25px;
+    background-color: #ffff;
+    color:black;
+}
+.login-btn:hover, .login-btn:focus{
+    background-color: #fff;
+    color:black;
+}
+
+.cart-btn{
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.search-bar{
+   position: relative;
+   width: 100%;
+   display: block;
+   justify-content: center;
+   align-items: center;
+}
+.search-inpt{
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 0px 15px 0px 35px;
+    width: 80%;
+    height: 35px;
+}
+.search-icon{
+    position: absolute;
+    top: 5px;
+    left: 8px;
+}
+
+@media screen and (max-width:780px) {
+    .search-inpt{
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        padding: 0px 15px 0px 35px;
+        width: 80%;
+        height: 35px;
+    }
+}
+@media screen and (max-width:468px) {
+    .search-bar{
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+     }
+    .search-inpt{
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        padding: 0px 15px 0px 35px;
+        width: 90%;
+        height: 35px;
+    }
+    .search-icon{
+        position: absolute;
+        top: 5px;
+        left: 38px;
+    }
+}

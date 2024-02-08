@@ -1,0 +1,56 @@
+
+.user-header{
+    position: fixed;
+    height: 7vh;
+    top: 0;
+    z-index: 10000;  
+   width: 100%;
+ }
+ 
+ .content-box{
+     position: relative;
+     min-height: 100vh;
+     height: auto;
+     top: 7vh;
+     background-color: #fbfbfb;
+ }
+ 
+ .user-footer{
+     position: relative;
+     /* left: 0; */
+     bottom: 0;
+     width: 100%;
+ }
+ 
+ @media screen  and (max-width:780px) {
+     .user-header{
+         position: fixed;
+         height: 7vh;
+         top: 0;
+         z-index: 10000;  
+        width: 100%;
+      }
+      .content-box{
+         position: relative;
+         min-height: 100vh;
+         height: auto;
+         top: 7vh;
+         background-color: #fbfbfb;
+     }
+ }
+ @media screen  and (max-width:468px) {
+     .user-header{
+         position: fixed;
+         height: 15vh;
+         top: 0;
+         z-index: 10000;  
+        width: 100%;
+      }
+      .content-box{
+         position: relative;
+         min-height: 100vh;
+         height: auto;
+         top: 15vh;
+         background-color: #fbfbfb;
+     }
+ }

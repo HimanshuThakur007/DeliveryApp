@@ -1,0 +1,29 @@
+.payment-login-box{
+    border-top: 1px solid #f0f0f0;
+    background: #fff;
+    padding: 16px 22px;
+    box-shadow: 0 -2px 10px 0 rgba(0,0,0,.1);
+}
+
+.payment-form-inpt{
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 2px;
+    padding: 10px 15px  10px 15px;
+    width: 100%;
+    font-size: 16px;
+    }
+
+    .paymet-method-ct{
+      background-color: #f5f8fe;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .pay-button{
+        background: #fb641b;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+        border: none;
+        color: #fff;
+        padding: 6px 30px 6px 30px;
+    }
+    

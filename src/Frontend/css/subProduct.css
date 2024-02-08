@@ -1,0 +1,164 @@
+
+
+
+/* -------------------for filter----section------------------------------------ */
+.filter-section{
+    background-color: #fff;
+    height: 100vh;
+    /* overflow-y: scroll; */
+}
+.dropdown-custome{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+}
+/* -------------------for product----section------------------------------------ */
+.product-list-section{
+    /* background-color: #fff; */
+    min-height: 100vh;
+    height: auto;
+    overflow-y: scroll;
+}
+.product-list-inner{
+  background-color: #fff;
+}
+
+
+.subproduct-card{
+    min-height: 350px;
+    height: auto;
+    width:100%;
+    background-color: #fff;
+    padding: 5px;
+}
+.subproduct-card:hover{
+    cursor: pointer;
+}
+
+.immage-crd-sub{
+    height: 250px;
+    width: 85%;
+}
+
+
+.subproduct-card {
+    transition: transform 0.5s;
+}
+.subproduct-card::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+    content: '';
+    opacity: 0;
+    z-index: -1;
+}
+.subproduct-card:hover, .subproduct-card:focus {
+    transform: scale3d(1.006, 1.006, 1);
+    /* transform: scale3d(1.05, 1.06, 1); */
+    transition: all 0.3ms;
+}
+.subproduct-card:hover::after, .subproduct-card:focus::after {
+    opacity: 1;
+}
+
+
+/* -------------for pagination---------------------------------- */
+.pagination-button-prev{
+    background-color: blue;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.pagination-button-next{
+    background-color: blue;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.pagination-button-next:hover, .pagination-button-next:focus{
+    background: rgb(55, 130, 235);
+    color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.pagination-button-prev:hover, .pagination-button-prev:focus{
+    background: rgb(55, 130, 235);
+    color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.pagination-button{
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    height: 35px;
+    width: 40px;
+    padding: 5px;
+    background: blue;
+    color: white;
+    margin: 2px;
+}
+.pagination-button:hover , .pagination-button:focus{
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    height: 35px;
+    width: 40px;
+    padding: 5px;
+    background: rgb(55, 130, 235);
+    color: white;
+    margin: 2px;
+}
+
+
+
+@media screen and (max-width:780px) {
+    .filter-section{
+        background-color: #fff;
+        min-height: 40vh;
+        height: auto;
+    
+    }
+    .submenu-items {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        padding-top: 5px;
+    }
+    .sub-menu{
+        height: 7vh;
+        background-color: #fff;
+       border-bottom: 1px solid #e5e3e3;
+    }
+    .submenu-list{
+        padding: 5px 10px 5px 10px;
+    }
+}
+@media screen and (max-width:468px) {
+    .filter-section{
+        background-color: #fff;
+        min-height: 40vh;
+        height: auto;
+        
+    }
+    .submenu-items {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        padding-top: 10px;
+    }
+    .sub-menu{
+        min-height: 10vh;
+        height: auto;
+        background-color: #fff;
+       border-bottom: 1px solid #e5e3e3;
+    }
+    .submenu-list{
+        padding: 5px 10px 5px 10px;
+    }
+}

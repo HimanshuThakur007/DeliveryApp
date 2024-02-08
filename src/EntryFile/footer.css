@@ -1,0 +1,133 @@
+.footer-main-ct{
+    height: auto;
+    min-height: 30vh;
+    background: transparent;
+    overflow: hidden;
+}
+.footer-box-one{
+    height: 42vh;
+    /* background: #f9f9f9; */
+    background-color: #070729;
+}
+.footer-box-two{
+    height: 8vh;
+    /* background: #0d0a30; */
+    background-color: #070729;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-txt-footer{
+    text-shadow: 5px 5px 10px #2fdeee;;
+    color: #0d0b38;
+}
+
+.footer-logo-sec{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.footer-nav-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer-social-icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-icon-list{
+    display: flex;
+    justify-content: space-around;
+}
+
+.social-icon-box{
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border: 1px solid #3840a9;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.footer-copyright-txt{
+    /* color: #131058; */
+    color: #fff;
+}
+
+
+.footer-box-one-home{
+    height: 42vh;
+    background-color: #070729;
+  }
+
+  .footer-box-two-home{
+    height: 8vh;
+    background-color: #070729;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  .logo-txt-footer-home{
+    text-shadow: 5px 5px 10px #fa4e4e;;
+    color: #fff;
+    font-size: 16px;
+}
+.footer-copyright-txt-home{
+    color: #fff;
+}
+
+
+@media screen and (max-width: 780px) {
+    .footer-box-one-home{
+        min-height: 22vh;
+        height: auto;
+        background-color: #070729;
+    }
+    .footer-box-two-home{
+        min-height: 12vh;
+        height: auto;
+        background-color: #070729;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer-box-two h6{
+        height: 8vh;
+        /* background: #0d0a30; */
+        background-color: #070729;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .footer-box-one-home{
+        min-height: 22vh;
+        height: auto;
+        background-color: #070729;
+    }
+    .footer-box-two-home{
+        min-height: 12vh;
+        height: auto;
+        background-color: #070729;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer-box-two h6{
+        height: 8vh;
+        /* background: #0d0a30; */
+        background-color: #070729;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+    }
+}
