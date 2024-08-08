@@ -24,22 +24,22 @@ import CountUp from "react-countup";
 import { Helmet } from "react-helmet";
 import RightSideBar from "../components/rightSidebar";
 import { Chart } from "react-google-charts";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import useFetch from "../Hooks/useFetch";
+import { useAuthContext } from "../components/common/AuthContext";
+import { convertDate2 } from "./ReuseFunctions/ReuseFunction";
 // import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 
-export const data = [
-  ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
-];
 
-export const options = {
-  title: "",
-  is3D: true,
-};
+
+
+
 const Dashboard = () => {
+  const { url, port, state, actions } = useAuthContext();
+  const decData = state.decryptedData;
+  console.log('decData',decData)
+var { Token } = decData;
   const [expiredData] = useState([
     {
       id: 1,
@@ -78,6 +78,12 @@ const Dashboard = () => {
       expiryDate: "20-05-2022",
     },
   ]);
+  const [cardData, setCardData] = useState({ })
+  const [recentlyDeliveredOrder, setRecentlyDeliveredOrder] = useState([])
+  const [dates, setDates] = useState({
+    deliveredOrder: new Date(),
+    tDate: new Date()
+  });
 
   const [recentData] = useState([
     { id: 1, image: EarpodIcon, products: "Apple Earpods", price: "$891.2" },
@@ -85,6 +91,26 @@ const Dashboard = () => {
     { id: 3, image: SamsungIcon, products: "Samsung", price: "$561.2" },
     { id: 4, image: MacbookIcon, products: "Macbook Pro", price: "$1009.2" },
   ]);
+
+ const data = [
+    ["Sales", "Status"],
+    ["Delivered", cardData.totDeliver],
+    ["Cancel", cardData.totCancel],
+    ["Paid", cardData.totPaid],
+    // ["Paid", 2],
+    // ["Watch TV", 2],
+    // ["Sleep", 7],
+  ];
+const options = {
+    title: "",
+    is3D: true,
+  };
+  const handleDateChange = (dateFieldName, dateValue) => {
+    setDates({
+      ...dates,
+      [dateFieldName]: dateValue,
+    });
+  };
 
   const expiredProductColumns = [
     {
@@ -138,45 +164,114 @@ const Dashboard = () => {
   ];
 
   const recentDataColumns = [
+   
     {
-      title: "SNo",
-      dataIndex:"id",
-      sorter: (a, b) => a.id.length - b.id.length,
+      title: "Vehicle",
+      dataIndex: "vechicle",
+      // render: (text, record) => <div style={{ fontSize: "14px" }}>{text}</div>,
+      sorter: (a, b) => a.vechicle.length - b.vechicle.length,
     },
     {
-      title: "Products",
-      dataIndex: "products",
-      render: (text, record) => (
-        <div className="productimgname">
-          <Link to="#" className="product-img">
-            <img alt="" src={record.image} />
-          </Link>
-          <Link to="#" style={{ fontSize: "14px" }}>
-            {record.products}
-          </Link>
-        </div>
-      ),
-      sorter: (a, b) => a.products.length - b.products.length,
-      width: "250px",
+      title: "Account Name",
+      dataIndex: "accName",
+      // render: (text, record) => <div style={{ fontSize: "14px" }}>{text}</div>,
+      sorter: (a, b) => a.accName.length - b.accName.length,
     },
     {
-      title: "Price",
-      dataIndex: "price",
-      render: (text, record) => <div style={{ fontSize: "14px" }}>{text}</div>,
-      sorter: (a, b) => a.price.length - b.price.length,
+      title: "Mobile No",
+      dataIndex: "mobile",
+      // render: (text, record) => <div style={{ fontSize: "14px" }}>{text}</div>,
+      sorter: (a, b) => a.mobile.length - b.mobile.length,
+    },
+    {
+      title: "Quantity",
+      dataIndex: "qty",
+      // render: (text, record) => <div style={{ fontSize: "14px" }}>{text}</div>,
+      sorter: (a, b) => a.qty.length - b.qty.length,
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      // render: (text, record) => <div style={{ fontSize: "14px" }}>{text}</div>,
+      sorter: (a, b) => a.amount.length - b.amount.length,
+    },
+    {
+      title: "Dispatch Date",
+      dataIndex: "dispDate",
+      // render: (text, record) => <div style={{ fontSize: "14px" }}>{text}</div>,
+      sorter: (a, b) => a.dispDate.length - b.dispDate.length,
     },
   ];
+  const datePickerStyle = {
+    width: '50%', // Adjust the width as needed
+  };
+    let api = useFetch()
+  //   =============================Assign No ============================
+  const getDashboardData = async () => {
+    // let corrData = [];
+    let url = `/api/GetDashBoardData?`;
+    try {
+      // setLoading(true);
+      let { res, got } = await api(url, "GET", "");
+      console.log("dashboardData", got);
+      if (got.status === 1) {
+        let data = got.data
+        setCardData(data)
+        // setLoading(false);
+      } else {
+        // setLoading(false);
+        alert("Something Went Wrong in List loading");
+      }
+    } catch (err) {
+      // setLoading(false);
+      alert(err);
+    }
+  };
+  //   =============================Recently Delivered Order ============================
+  const getRecentDeliveredOrder = async () => {
+    var fdate = convertDate2(dates.deliveredOrder)||''
+    // let corrData = [];
+    let url = `/api/GetRecentDeliver?SDate=${fdate}`;
+    try {
+      // setLoading(true);
+      let { res, got } = await api(url, "GET", "");
+      console.log("dashboardData", got);
+      if (got.status === 1) {
+        let data = got.data
+        setRecentlyDeliveredOrder(data)
+        // setLoading(false);
+      } else {
+        // setLoading(false);
+        alert("Something Went Wrong in List loading");
+      }
+    } catch (err) {
+      // setLoading(false);
+      alert(err);
+    }
+  };
+
+
+  React.useEffect(()=>{
+    if(Token){
+      getDashboardData();
+    }
+  },[Token])
+  React.useEffect(()=>{
+    if(Token){
+      getRecentDeliveredOrder()
+    }
+  },[Token,dates])
 
   return (
     <>
       <div className=" page-wrapper">
         <Helmet>
-          <title>Delivery App Dashboard</title>
+          <title>Fleet Management System Dashboard</title>
           <meta name="description" content="Dashboard page" />
         </Helmet>
         <div className="content ">
           <div className="row">
-            {/* <div className="col-lg-3 col-sm-6 col-12">
+            <div className="col-lg-3 col-sm-6 col-12">
               <div className="dash-widget">
                 <div className="dash-widgetimg">
                   <span>
@@ -185,12 +280,12 @@ const Dashboard = () => {
                 </div>
                 <div className="dash-widgetcontent">
                   <h5>
-                    $
+                    
                     <span className="counters">
-                      <CountUp end={307144} />
+                      <CountUp end={cardData.assignvechicle} />
                     </span>
                   </h5>
-                  <h6>Total Purchase Due</h6>
+                  <h6>On Route Vehicle</h6>
                 </div>
               </div>
             </div>
@@ -203,12 +298,12 @@ const Dashboard = () => {
                 </div>
                 <div className="dash-widgetcontent">
                   <h5>
-                    $
+                    
                     <span className="counters">
-                      <CountUp end={4385} />
+                      <CountUp end={cardData.totvechicle} />
                     </span>
                   </h5>
-                  <h6>Total Sales Due</h6>
+                  <h6>Vehicle</h6>
                 </div>
               </div>
             </div>
@@ -221,12 +316,12 @@ const Dashboard = () => {
                 </div>
                 <div className="dash-widgetcontent">
                   <h5>
-                    $
+                    
                     <span className="counters">
-                      <CountUp end={385656.5} />
+                      <CountUp end={cardData.totDriver} />
                     </span>
                   </h5>
-                  <h6>Total Sale Amount</h6>
+                  <h6>Driver</h6>
                 </div>
               </div>
             </div>
@@ -239,20 +334,21 @@ const Dashboard = () => {
                 </div>
                 <div className="dash-widgetcontent">
                   <h5>
-                    $
+                    
                     <span className="counters">
-                      <CountUp end={40000} />
+                      <CountUp end={cardData.totTransport} />
+                      {/* {global.transport!= undefined? global.transport:0} */}
                     </span>
                   </h5>
-                  <h6>Total Sale Amount</h6>
+                  <h6>Transport</h6>
                 </div>
               </div>
-            </div> */}
-            <div className="col-lg-3 col-sm-6 col-12 d-flex">
+            </div>
+            {/* <div className="col-lg-3 col-sm-6 col-12 d-flex">
               <div className="dash-count">
                 <div className="dash-counts">
                   <h4>100</h4>
-                  <h5>Customers</h5>
+                  <h5>On Route Vehicle</h5>
                 </div>
                 <div className="dash-imgs">
                   <FeatherIcon icon="user" />
@@ -263,7 +359,7 @@ const Dashboard = () => {
               <div className="dash-count das1">
                 <div className="dash-counts">
                   <h4>100</h4>
-                  <h5>Driver</h5>
+                  <h5>Vehicle</h5>
                 </div>
                 <div className="dash-imgs">
                   <FeatherIcon icon="user-check" />
@@ -274,7 +370,7 @@ const Dashboard = () => {
               <div className="dash-count das2">
                 <div className="dash-counts">
                   <h4>100</h4>
-                  <h5>Invoice</h5>
+                  <h5>Driver</h5>
                 </div>
                 <div className="dash-imgs">
                   <FeatherIcon icon="file-text" />
@@ -285,7 +381,51 @@ const Dashboard = () => {
               <div className="dash-count das3">
                 <div className="dash-counts">
                   <h4>105</h4>
-                  <h5>Sales Invoice</h5>
+                  <h5>Transport</h5>
+                </div>
+                <div className="dash-imgs">
+                  <FeatherIcon icon="file" />
+                </div>
+              </div>
+            </div> */}
+            <div className="col-lg-3 col-sm-6 col-12 d-flex">
+              <div className="dash-count">
+                <div className="dash-counts">
+                  <h4>{cardData.totAssign}</h4>
+                  <h5>Assigned Delivery</h5>
+                </div>
+                <div className="dash-imgs">
+                  <FeatherIcon icon="user" />
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-sm-6 col-12 d-flex">
+              <div className="dash-count das1">
+                <div className="dash-counts">
+                  <h4>{cardData.totDeliver}</h4>
+                  <h5>Delivered Order</h5>
+                </div>
+                <div className="dash-imgs">
+                  <FeatherIcon icon="user-check" />
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-sm-6 col-12 d-flex">
+              <div className="dash-count das2">
+                <div className="dash-counts">
+                  <h4>{cardData.totCancel}</h4>
+                  <h5>Cancel Order</h5>
+                </div>
+                <div className="dash-imgs">
+                  <FeatherIcon icon="file-text" />
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-sm-6 col-12 d-flex">
+              <div className="dash-count das3">
+                <div className="dash-counts">
+                  <h4>{cardData.totPaid}</h4>
+                  <h5>Paid Order</h5>
                 </div>
                 <div className="dash-imgs">
                   <FeatherIcon icon="file" />
@@ -295,7 +435,7 @@ const Dashboard = () => {
           </div>
           {/* Button trigger modal */}
           <div className="row">
-            <div className="col-lg-7 col-sm-12 col-12 d-flex">
+            <div className="col-lg-6 col-sm-12 col-12 d-flex">
               <div className="card flex-fill">
                 <div className="card-header pb-0 d-flex justify-content-between align-items-center">
                   <h5 className="card-title mb-0">Purchase &amp; Sales</h5>
@@ -345,21 +485,30 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-5 col-sm-12 col-12 d-flex">
+            <div className="col-lg-6 col-sm-12 col-12 d-flex">
               <div className="card flex-fill">
                 <div className="card-header pb-0 d-flex justify-content-between align-items-center">
                   {/* <h4 className="card-title mb-0">Recently Added Products</h4> */}
                   <h4 className="card-title mb-0">
-                    Recently Delivered Delivery
+                    Recently Delivered Order
                   </h4>
-                  <div className="dropdown dropdown-action profile-action">
+                  <div className="col-3">
+                  <DatePicker
+                    dateFormat="dd/MM/yyyy"
+                    selected={dates.deliveredOrder}
+                    onChange={(date) => handleDateChange("deliveredOrder", date)}
+                    style={{ width: '20px' }}
+                    className="form-control"
+                  />
+                  </div>
+                  {/* <div className="dropdown dropdown-action profile-action">
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                       className="dropset"
                     >
-                      {/* <FontAwesomeIcon icon={""} /> */}
+                      <FontAwesomeIcon icon={""} />
                     </Link>
                     <ul
                       className="dropdown-menu"
@@ -382,15 +531,19 @@ const Dashboard = () => {
                         </Link>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="card-body">
                   <div className="table-responsive dataview">
                     <Table
                       className="bg-denger"
                       columns={recentDataColumns}
-                      dataSource={recentData}
+                      dataSource={recentlyDeliveredOrder}
                       pagination={false}
+                      scroll={{
+                        y:300
+                      }}
+                      rowKey={(record)=>record.busyCode}
                     />
                   </div>
                 </div>

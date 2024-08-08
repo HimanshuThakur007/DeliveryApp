@@ -3,12 +3,12 @@
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "es-mini-logo.png",
+      "src": "shantiLogo1.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png"
     },
     {
-      "src": "es-mini-logo.png",
+      "src": "shantiLogo1.png",
       "type": "image/png",
       "sizes": "512x512"
     }

@@ -36,10 +36,18 @@ const NewDriver = () => {
 
   const handleInputField = (e) => {
     const { name, value } = e.target;
-    setInputValue((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (name === "Mobile") {
+      const numericValue = value.replace(/\D/g, ''); // Remove non-numeric characters
+      setInputValue(prevState => ({
+        ...prevState,
+        [name]: numericValue.slice(0, 10) // Limit to 10 digits
+      }));
+    } else {
+      setInputValue(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
   const {Name,Email,cPassword,Password,Mobile,VechicleNum,VechicleModel,VechicleType,Address} = inputValue
 
@@ -58,8 +66,10 @@ const NewDriver = () => {
   };
 
   const handleImageConverted = (base64Data) => {
-    // Do something with the base64Data, like send it to a server or perform other operations
-    console.log("Base64 image:", base64Data);
+    // let base64String = base64Data;
+    // base64String = base64String.substring(base64String.indexOf(',') + 1);
+    // console.log("Base64 image:", base64String);
+    setImagePath(base64Data)
   };
 
   // ==================================transport-list=================================
@@ -92,6 +102,11 @@ const NewDriver = () => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{4,}$/;
     return passwordRegex.test(password);
   };
+  // ==========================vehicle number validation===================================
+  const isVehicleNumberValid = (vehicleNumber) => {
+    const vehicleNumberRegex = /^[A-Z]{2}\d{2}[A-Z]{2}\d{4}$/;
+    return vehicleNumberRegex.test(vehicleNumber);
+  };
 
   // ========================================save-data===================================
   const saveHandler = async (e) => {
@@ -122,9 +137,33 @@ const NewDriver = () => {
       TransportCode: trancode,
       TransportName: tranlabel,
       Deactivate:0,
-      ImgPath:'',
+      ImgPath:imagePath,
       ImgExt:'',
     };
+// Email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(Email)) {
+    showToastError('Please enter a valid email address.');
+    return;
+}
+
+// Mobile validation
+const mobileRegex = /^\d{10}$/; // Assuming mobile number should be 10 digits
+if (!mobileRegex.test(body.Mobile)) {
+  showToastError('Please enter a valid 10-digit mobile number.');
+  return;
+}
+    // Name validation
+    const nameRegex = /^[a-zA-Z0-9 ]{2,}$/; // Minimum 2 characters, only letters, numbers, and spaces allowed
+    if (!nameRegex.test(body.Name)) {
+      showToastError('Name should be at least 2 characters long and should not contain special characters.');
+      return;
+    }
+if (!isVehicleNumberValid(VechicleNum)) {
+  showToastError('Please enter a valid vehicle number.');
+  return;
+}
+
     if (!isPasswordValid(Password)) {
       showToastError('Password must be at least 4 characters long and include at least one letter and one digit.');
       return;
@@ -182,7 +221,7 @@ const NewDriver = () => {
           VechicleType:list.vechicleType,
           Address:list.address
         })
-        setInitialValue(list.transporter)
+        setInitialValue({transport:list.transporter})
         setSelectedTransport({value:list.transportCode, label:list.transportName})
         setValues({transport:list.transporter})
         // setMasterType(131003)

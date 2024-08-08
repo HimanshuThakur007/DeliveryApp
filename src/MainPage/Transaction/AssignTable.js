@@ -11,6 +11,9 @@ const AssignTable = () => {
     let api = useFetch()
     const [loading, setLoading] = useState(false);
     const [AssignTable, setAssignTable] = useState([]);
+    const [driverList, setDriverlist] = useState([]);
+    const [values, setValues] = useState({});
+    const [selectedDriver, setSelectedDriver] = useState(null);
     const [dates, setDates] = useState({
         fDate: new Date(),
         tDate: new Date()
@@ -94,16 +97,46 @@ const AssignTable = () => {
       [dateFieldName]: dateValue,
     });
   };
+     //   =============================Driver-List MasterType=3 ============================
+     const getDriverList = async () => {
+      // let corrData = [];
+      let url = `/api/GetMaster?MasterType=3&TranType=3`;
+      try {
+        setLoading(true);
+        let { res, got } = await api(url, "GET", "");
+        if (res.status == 200) {
+          console.log("driver", got.data);
+          let list = got.data;
+          // list.map((item) => {
+          //   corrData.push({ label: item.name, value: item.code });
+          // });
+          setDriverlist(list);
+          setLoading(false);
+        } else {
+          setLoading(false);
+          alert("Something Went Wrong in List loading");
+        }
+      } catch (err) {
+        setLoading(false);
+        alert(err);
+      }
+    };
 
   const getAssignListData = async () => {
+    setAssignTable([])
     // e.preventDefault();
-    
-    let fromDate = convertDate2(dates.fDate)||'';
-  let toDate = convertDate2(dates.tDate)||'';
-  
+    if (selectedDriver !== null){
+      var driver = selectedDriver.value 
+    }
+    if(values.assign !== 0){
+      
+    var fromDate = convertDate2(dates.fDate)||'';
+    var toDate = convertDate2(dates.tDate)||'';
+    }
+  var status = values.assign||0
     // console.log('kkk', val)
-    let url = `/api/GetaSSIGNVoucher?SDate=${fromDate}&TDate=${toDate}&Status=0`;
-    console.log("uu", url);
+    let url = `/api/GetaSSIGNVoucher?SDate=${fromDate}&TDate=${toDate}&Status=${status}&Driver=${driver||0}`;
+    console.log("uu56", url);
     try {
       setLoading(true);
       let { res, got } = await api(url, "GET", "");
@@ -122,10 +155,25 @@ const AssignTable = () => {
       alert(err);
     }
   };
+    // ============================driver-Handler================================
+    const SelectDriverHandler=(select)=>{
+      setSelectedDriver(select)
+    }
+
+    const handleValueChange = (id, newValue) => {
+      setValues((prevValues) => ({
+        ...prevValues,
+        [id]: newValue,
+      }));
+    };
+
+  useEffect(()=>{
+    getDriverList()
+  },[])
 
   useEffect(()=>{
     getAssignListData()
-  },[])
+  },[values])
 
   const columns = [
     {
@@ -155,7 +203,7 @@ const AssignTable = () => {
       sorter: (a, b) => a.driver.length - b.driver.length,
     },
     {
-      title: "Mobile No",
+      title: "Mobile Number",
       dataIndex: "dMobile",
       sorter: (a, b) => a.dMobile.length - b.dMobile.length,
     },
@@ -226,6 +274,11 @@ const AssignTable = () => {
         data = {AssignTable}
         loading={loading}
         getAssignListData={getAssignListData}
+        driverList={driverList}
+        selectedDriver={selectedDriver}
+        SelectDriverHandler={SelectDriverHandler}
+        handleValueChange={handleValueChange}
+        values={values}
         />
     </React.Fragment>
   )

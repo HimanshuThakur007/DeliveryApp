@@ -36,9 +36,9 @@ const NewDriverPage = (props) => {
               <div className="col-lg-3 col-sm-6 col-12">
                 
                 <InputField star="*" labelName='Name' name="Name" type="text" value={Name} onChange={props.handleInputField} required/>
-                <InputField labelName='Email' name="Email" type="email" value={Email} onChange={props.handleInputField}/>
+                <InputField star="*" labelName='Email Id' name="Email" type="email" value={Email} onChange={props.handleInputField} required/>
                 <div className="form-group">
-                  <label>Confirm Password</label>
+                  <label>Confirm Password <span className='text-danger'>*</span></label>
                   <div className="pass-group">
                     <input
                       type={props.passwordShown ? "text" : "password"}
@@ -57,10 +57,10 @@ const NewDriverPage = (props) => {
                 </div>
               </div>
               <div className="col-lg-3 col-sm-6 col-12">
-                <InputField star="*" labelName="Mobile" name="Mobile" type="number" value={Mobile} onChange={props.handleInputField} required/>
+                <InputField star="*" labelName="Mobile Number" name="Mobile" type="number" value={Mobile} onChange={props.handleInputField} required/>
                 
                 <div className="form-group">
-                  <label>Password</label>
+                  <label>Password <span className='text-danger'>*</span></label>
                   <div className="pass-group">
                     <input
                       type={props.passwordShown1 ? "text" : "password"}
@@ -68,6 +68,7 @@ const NewDriverPage = (props) => {
                       name="Password"
                       value={Password}
                       onChange={props.handleInputField}
+                      required
                     />
                     <span
                       className={`fas toggle-password ${
@@ -109,13 +110,13 @@ const NewDriverPage = (props) => {
             <div className="row">
               <div className="col-lg-3 col-sm-6 col-12">
                 
-                <InputField labelName='Vehicle Number' name="VechicleNum" type="text" value={VechicleNum} onChange={props.handleInputField}/>
+                <InputField labelName='Vehicle Number' name="VechicleNum" type="text" value={VechicleNum.toUpperCase()} onChange={props.handleInputField}/>
                 <InputField labelName='Vehicle Modal' name="VechicleModel" type="text" value={VechicleModel} onChange={props.handleInputField}/>
                 
                 <ToggleButton
                 toggleName = "Transport" 
                 id="transport" 
-                initialValue={props.initialValue} 
+                initialValue={props.values.transport} 
                 onValueChange={props.handleValueChange}
                 />
                 

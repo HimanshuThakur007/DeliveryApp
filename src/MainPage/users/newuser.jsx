@@ -37,10 +37,18 @@ const Newuser = () => {
 
   const handleInputField = (e) => {
     const { name, value } = e.target;
-    setInputValue((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (name === "Mobile") {
+      const numericValue = value.replace(/\D/g, ''); // Remove non-numeric characters
+      setInputValue(prevState => ({
+        ...prevState,
+        [name]: numericValue.slice(0, 10) // Limit to 10 digits
+      }));
+    } else {
+      setInputValue(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
   const {UserName,Email,Password,Mobile,} = inputValue
 
@@ -52,8 +60,8 @@ const Newuser = () => {
   };
 
   const handleImageConverted = (base64Data) => {
-    // Do something with the base64Data, like send it to a server or perform other operations
     console.log("Base64 image:", base64Data);
+    setImagePath(base64Data)
   };
 
   // ==================================transport-list=================================
@@ -101,12 +109,27 @@ const Newuser = () => {
       Mobile,
       Password,
       Email,
-      Role: parseInt(selectedRole.value)||0,
-      RoleName: selectedRole.label||'',
+      Role: selectedRole != null ? parseInt(selectedRole.value):0,
+      RoleName: selectedRole != null ? selectedRole.label:'',
       Deactivate:0,
-      ImgPath:'',
+      ImgPath:imagePath,
       ImgExt:'',
     };
+
+     // Email validation
+     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     if (!emailRegex.test(Email)) {
+         showToastError('Please enter a valid email address.');
+         return;
+     }
+
+     // Mobile validation
+     const mobileRegex = /^\d{10}$/; // Assuming mobile number should be 10 digits
+     if (!mobileRegex.test(body.Mobile)) {
+       showToastError('Please enter a valid 10-digit mobile number.');
+       return;
+     }
+
     if (!isPasswordValid(Password)) {
       showToastError('Password must be at least 4 characters long and include at least one letter and one digit.');
       return;

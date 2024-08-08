@@ -3,38 +3,18 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import Table from "../../EntryFile/datatable";
-import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import Tabletop from "../../EntryFile/tabletop";
-import Swal from "sweetalert2";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  ClosesIcon,
-  Excel,
-  Filter,
-  Pdf,
-  Eye1,
-  Calendar,
-  Printer,
-  search_whites,
-  Search,
-  PlusIcon,
-  EditIcon,
-  Dollar1,
-  plusCircle,
-  Download,
-  delete1,
-  DeleteIcon,
-  datepicker,
-} from "../../EntryFile/imagePath";
 import CardComp from "../../CustomComps/CardComp";
 import InputSelect from "../../CustomComps/InputSelect";
 import InputField from "../../CustomComps/InputField";
 import ToggleButton from "../../CustomComps/ToggleButton";
 import ReactLoader from "../../CustomComps/ReactLoader";
-
+// import AssigntoModal from "./AssigntoModal";
 
 const AssignToPage = (props) => {
+  console.log("selectedRow",props.selectedRow)
   const [inputfilter, setInputfilter] = useState(false);
   //   const [startDate, setStartDate] = useState(new Date());
 
@@ -46,6 +26,7 @@ const AssignToPage = (props) => {
     <>
       <div className="page-wrapper">
         <div className="content">
+          {/* <PDFModal/> */}
           <div className="page-header">
             <div className="page-title">
               <h4>Assign To</h4>
@@ -68,164 +49,247 @@ const AssignToPage = (props) => {
           ) : null}
           {/* /product list */}
           <form onSubmit={props.saveHandler}>
-          <CardComp>
-            <div className="row">
-              <div className="col-lg-4 col-sm-6 col-12">
-                <InputSelect
-                  label="Driver"
-                  options={props.driverList}
-                  value={props.selectedValues.driver}
-                  onChange={(selectedOption) =>
-                    props.handleSelectChange(
-                      selectedOption,
-                      "driver",
-                      props.setSelectedValues
-                    )
-                  }
-                  required
-                />
-               
-                <InputField
-                  labelName="Assign Number"
-                  value={props.assignNo}
-                  disabled
-                />
-              </div>
-              <div className="col-lg-4 col-sm-6 col-12">
-                <InputSelect
-                  label="Vehicle"
-                  options={props.vehicleList}
-                  value={props.selectedValues.vehicle}
-                  onChange={(selectedOption) =>
-                    props.handleSelectChange(
-                      selectedOption,
-                      "vehicle",
-                      props.setSelectedValues
-                    )
-                  }
-                  requires
-                />
+            <CardComp>
+              <div className="row">
+                <div className="col-lg-4 col-sm-6 col-12">
+                  <InputSelect
+                    label="Driver"
+                    options={props.driverList}
+                    value={props.selectedValues.driver}
+                    onChange={(selectedOption) =>
+                      props.handleSelectChange(
+                        selectedOption,
+                        "driver",
+                        props.setSelectedValues
+                      )
+                    }
+                    required
+                  />
 
-                <div className="row mb-3">
-                  <label htmlFor="date" className="form-label">
-                    Date
-                  </label>
+                  <InputField
+                    labelName="Assign Number"
+                    value={props.assignNo}
+                    disabled
+                  />
+                </div>
+                <div className="col-lg-4 col-sm-6 col-12">
+                  <InputSelect
+                    label="Vehicle"
+                    options={props.vehicleList}
+                    value={props.selectedValues.vehicle}
+                    onChange={(selectedOption) =>
+                      props.handleSelectChange(
+                        selectedOption,
+                        "vehicle",
+                        props.setSelectedValues
+                      )
+                    }
+                    requires
+                  />
 
-                  <DatePicker
-                    showIcon
-                    className="form-control"
-                    dateFormat="dd/MM/yyyy"
-                    selected={props.dates.Date}
-                    onChange={(date) => props.handleDateChange("Date", date)}
+                  <div className="row mb-3">
+                    <label htmlFor="date" className="form-label">
+                      Date
+                    </label>
+
+                    <DatePicker
+                      showIcon
+                      className="form-control"
+                      dateFormat="dd/MM/yyyy"
+                      selected={props.dates.Date}
+                      onChange={(date) => props.handleDateChange("Date", date)}
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-4 col-sm-6 col-12">
+                  <InputSelect
+                    label="Transport"
+                    options={props.transportList}
+                    value={props.selectedValues.transport}
+                    onChange={(selectedOption) =>
+                      props.handleSelectChange(
+                        selectedOption,
+                        "transport",
+                        props.setSelectedValues
+                      )
+                    }
                   />
                 </div>
               </div>
-              <div className="col-lg-4 col-sm-6 col-12">
-              <InputSelect
-                  label="Transport"
-                  options={props.transportList}
-                  value={props.selectedValues.transport}
-                  onChange={(selectedOption) =>
-                    props.handleSelectChange(
-                      selectedOption,
-                      "transport",
-                      props.setSelectedValues
-                    )
-                  }
+            </CardComp>
+            {/* <PDFModal
+          modalTitle="Company"
+          onSave={props.handleSave}
+          onHide={props.handleHide}
+          show={props.showModal}
+          // selectedCompList={selectedCompList}
+          modalContent={
+          <>Hello</>
+          }
+        /> */}
+            <div className="card">
+              <div className="card-body">
+                <Tabletop
+                  inputfilter={props.inputfilter}
+                  togglefilter={props.togglefilter}
+                  handleSearch={props.handleSearch}
+                  handleExportClick={props.handleExportClick}
                 />
-              
-              </div>
-            </div>
-          </CardComp>
+                <div className="row">
+                  <div className="col-12 d-flex">
+                    <div className="col-lg-2 col-sm-6 col-12 mt-2">
+                      <ToggleButton
+                        toggleName="Filter By Date"
+                        id="assign"
+                        initialValue={props.initialValue}
+                        onValueChange={props.handleValueChange}
+                      />
+                    </div>
+                    {props.values.assign === 1 ? (
+                      <>
+                        <div className="col-lg-4 col-sm-6 col-12">
+                          <label htmlFor="date" className="col-3 form-label">
+                            From Date
+                          </label>
 
-          <div className="card">
-            <div className="card-body">
-            <Tabletop
-                inputfilter={props.inputfilter}
-                togglefilter={props.togglefilter}
-                handleSearch={props.handleSearch}
-                handleExportClick={props.handleExportClick}
-              />
-              <div className="row">
-                <div className="col-12 d-flex">
-                <div className="col-lg-2 col-sm-6 col-12 mt-2">
-                <ToggleButton
-                toggleName = "Filter By Date" 
-                id="assign" 
-                initialValue={props.initialValue} 
-                onValueChange={props.handleValueChange}
-                />
-                </div>
-                {props.values.assign === 1?(
-                <>
-                <div className="col-lg-4 col-sm-6 col-12">
-                 
-                    <label htmlFor="date" className="col-3 form-label">
-                      From Date
-                    </label>
+                          <DatePicker
+                            showIcon
+                            className="col-9 form-control"
+                            dateFormat="dd/MM/yyyy"
+                            selected={props.dates.fDate}
+                            onChange={(date) =>
+                              props.handleDateChange("fDate", date)
+                            }
+                          />
+                        </div>
+                        <div className="col-lg-4 col-sm-6 col-12">
+                          <label htmlFor="date" className="col-3 form-label">
+                            To Date
+                          </label>
 
-                    <DatePicker
-                    
-                      showIcon
-                      className="col-9 form-control"
-                      dateFormat="dd/MM/yyyy"
-                      selected={props.dates.fDate}
-                      onChange={(date) => props.handleDateChange("fDate", date)}
-                    />
-                 
-                </div>
-                <div className="col-lg-4 col-sm-6 col-12">
-                 
-                    <label htmlFor="date" className="col-3 form-label">
-                      To Date
-                    </label>
+                          <DatePicker
+                            showIcon
+                            className="col-9 form-control"
+                            dateFormat="dd/MM/yyyy"
+                            selected={props.dates.tDate}
+                            onChange={(date) =>
+                              props.handleDateChange("tDate", date)
+                            }
+                          />
+                        </div>
 
-                    <DatePicker
-                      showIcon
-                      className="col-9 form-control"
-                      dateFormat="dd/MM/yyyy"
-                      selected={props.dates.tDate}
-                      onChange={(date) => props.handleDateChange("tDate", date)}
-                    />
-                 
+                        <div className="col-lg-2 col-sm-2 col-12">
+                          <button
+                            type="submit"
+                            className="btn btn-primary"
+                            onClick={props.getAssignTableData}
+                          >
+                            Load Data
+                          </button>
+                        </div>
+                      </>
+                    ) : null}
+                  </div>
                 </div>
-                
-                <div className="col-lg-2 col-sm-2 col-12">
+                {/* <Tabletop inputfilter={inputfilter} togglefilter={togglefilter} /> */}
+
+                <div className="table-responsive">
+                  <Table
+                    props={props}
+                    columns={props.columns}
+                    dataSource={props.data}
+                    rowKey={(record) => record.sNo}
+                    handelSelectedKey={props.handelSelectedKey}
+                  />
+                </div>
+                <div className="col-12 mt-3">
                   <button
                     type="submit"
-                    className="btn btn-primary"
-                    onClick={props.getAssignTableData}
+                    className="btn btn-submit me-2"
+                    // onClick={props.saveHandler}
                   >
-                    Load Data
+                    Submit
                   </button>
                 </div>
-                </>):null}
+              </div>
+            </div>
+          </form>
+          {/* /product list */}
+          <div
+            className="modal fade"
+            id="assignto"
+            tabIndex={-1}
+            aria-labelledby="assignto"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog modal-lg modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Assign</h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">×</span>
+                  </button>
                 </div>
-              </div>
-              {/* <Tabletop inputfilter={inputfilter} togglefilter={togglefilter} /> */}
+                <div className="modal-body">
+                  {/* Inside the component where handleSelectChange is called */}
+                  {props.selectedRow.map((item, rowIndex) => (
+                    <InputSelect
+                      label={`Transport (for inv No.:-${item.billNo})`}
+                      key={rowIndex}
+                      onChange={(selectedOption) =>
+                        props.handleSelectChange(
+                          selectedOption,
+                          "transport2",
+                          props.setSelectedValues,
+                          rowIndex
+                        )
+                      }
+                      options={props.transportList}
+                    />
+                  ))}
 
-              <div className="table-responsive">
-                <Table
-                  props={props}
-                  columns={props.columns}
-                  dataSource={props.data}
-                  rowKey={(record) => record.vchCode}
-                  handelSelectedKey={props.handelSelectedKey}
-                />
-              </div>
-              <div className="col-12 mt-3">
-                <button
-                  type="submit"
-                  className="btn btn-submit me-2"
-                  // onClick={props.saveHandler}
-                >
+                  {/* <InputSelect
+                  label="Transport"
+                  options={options}
+                  value={value}
+                  onChange={onChange}
+                  // options={props.transportList}
+                  // value={props.selectedValues.transport}
+                  // onChange={(selectedOption) =>
+                  //   props.handleSelectChange(
+                  //     selectedOption,
+                  //     "transport",
+                  //     props.setSelectedValues
+                  //   )
+                  // }
+                /> */}
+                </div>
+                <div className="modal-footer">
+                  {/* <button type="button" className="btn btn-submit">
                   Submit
-                </button>
+                </button> */}
+                  <button
+                    type="button"
+                    className="btn btn-cancel"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-          </form>
-          {/* /product list */}
+          {/* <AssigntoModal
+          handleSelectChange={props.handleSelectChange}
+            // options={props.transportList}
+            // value={props.selectedValues.transport2}
+            // onChange={(selectedOption) => props.handleSelectChange(selectedOption, selectName, setSelectedValues, rowIndex)}
+          /> */}
         </div>
       </div>
     </>

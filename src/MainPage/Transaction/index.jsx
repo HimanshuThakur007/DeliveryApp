@@ -3,6 +3,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AssignTo from './AssignTo';
 import AssignTable from './AssignTable';
+import DropList from './DropList';
 
 
 
@@ -15,6 +16,10 @@ const TransactionIndex = () => (
     <Route
       path="assign_List"
       element={<AssignTable />}
+    />
+    <Route
+      path="drop_List"
+      element={<DropList />}
     />
    
     

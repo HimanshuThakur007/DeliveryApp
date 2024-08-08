@@ -30,21 +30,21 @@ const VehiclePage = (props) => {
               <form onSubmit={props.saveHandler}>
               <div className="row">
                 <div className="col-lg-3 col-sm-6 col-12">
-                  <InputField star="*" labelName="Veicle Number" name="Name" type="text" value={Name.toUpperCase()} onChange={props.handleInputField} required/>
+                  <InputField star="*" labelName="Vehicle Number" name="Name" type="text" value={Name.toUpperCase()} onChange={props.handleInputField} required/>
 
-                  <InputField labelName="Veicle Modal" name="VechicleModel" type="text" value={VechicleModel} onChange={props.handleInputField} />
+                  <InputField labelName="Vehicle Modal" name="VechicleModel" type="text" value={VechicleModel} onChange={props.handleInputField} />
 
                   <ToggleButton
                     toggleName="Transport"
                     id="transport"
-                    initialValue={props.initialValue}
+                    initialValue={props.values.transport}
                     onValueChange={props.handleValueChange}
                   />
                 </div>
                 <div className="col-lg-3 col-sm-6 col-12">
-                  <InputField labelName="Veicle Type" type="text" name="VechicleType" value={VechicleType} onChange={props.handleInputField}/>
+                  <InputField labelName="Vehicle Type" type="text" name="VechicleType" value={VechicleType} onChange={props.handleInputField}/>
                   {/* <InputField labelName="Mobile" type="text"/> */}
-                  {props.values.transport === 1 || props.initialValue === 1 ? (
+                  {props.values.transport == 1 || props.initialValue == 1 ? (
                     <InputSelect label="Transport" options={props.transportlist} value={props.selectedTransport} onChange={props.selectHandler} required={props.values.transport === 1 ? "required":""}/>
                   ) : (
                     ""

@@ -127,6 +127,7 @@ const GenaralSettings = () => {
       compDB: selectedRow.compDB,
       fy: selectedRow.fy,
       compSelect: selectedRow.compSelect,
+      CompName:selectedRow.compName
     }));
 
     console.log("body", JSON.stringify(body));

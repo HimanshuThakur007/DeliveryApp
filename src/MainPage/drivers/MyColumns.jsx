@@ -1,19 +1,30 @@
 // import { Table } from 'antd';
+import { Link } from "react-router-dom";
 import {EditIcon, DeleteIcon} from "../../EntryFile/imagePath";
 
 const MyColumns = (onEditClick, onDeleteClick) => [
     {
         title: "User Name",
         dataIndex: "name",
+        render: (text, record) => (
+          <div className="productimgname">
+            <Link to="#" className="product-img">
+              <img alt="" src={record.imgPath} />
+            </Link>
+            <Link to="#" style={{ fontSize: "15px", marginLeft: "10px" }}>
+              {record.name}
+            </Link>
+          </div>
+        ),
         sorter: (a, b) => a.name.length - b.name.length,
       },
       {
-        title: "Mobile",
+        title: "Mobile Number",
         dataIndex: "mobile",
         sorter: (a, b) => a.mobile.length - b.mobile.length,
       },
       {
-        title: "Email",
+        title: "Email Id",
         dataIndex: "email",
         sorter: (a, b) => a.email.length - b.email.length,
       },
@@ -67,19 +78,34 @@ export default MyColumns
 
 
 export const TransportColumn =(onEditClick, onDeleteClick)=>[
+  {
+    title: "Transporter Name",
+    dataIndex: "name",
+    render: (text, record) => (
+      <div className="productimgname">
+        <Link to="#" className="product-img">
+          <img alt="" src={record.imgPath} />
+        </Link>
+        <Link to="#" style={{ fontSize: "15px", marginLeft: "10px" }}>
+          {record.name}
+        </Link>
+      </div>
+    ),
+    sorter: (a, b) => a.name.length - b.name.length,
+  },
 
- {
-        title: "Transporter Name",
-        dataIndex: "name",
-        sorter: (a, b) => a.name.length - b.name.length,
-      },
+//  {
+//         title: "Transporter Name",
+//         dataIndex: "name",
+//         sorter: (a, b) => a.name.length - b.name.length,
+//       },
       {
-        title: "Mobile",
+        title: "Mobile Number",
         dataIndex: "mobile",
         sorter: (a, b) => a.mobile.length - b.mobile.length,
       },
       {
-        title: "Email",
+        title: "Email Id",
         dataIndex: "email",
         sorter: (a, b) => a.email.length - b.email.length,
       },
@@ -109,6 +135,16 @@ export const VehicleColumn =(onEditClick, onDeleteClick)=>[
  {
         title: "Vehicle Name",
         dataIndex: "name",
+        render: (text, record) => (
+          <div className="productimgname">
+            <Link to="#" className="product-img">
+              <img alt="" src={record.imgPath} />
+            </Link>
+            <Link to="#" style={{ fontSize: "15px", marginLeft: "10px" }}>
+              {record.name}
+            </Link>
+          </div>
+        ),
         sorter: (a, b) => a.name.length - b.name.length,
       },
       {

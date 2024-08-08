@@ -8,12 +8,12 @@ const UsersColumn = (onEditClick, onDeleteClick) => [
       sorter: (a, b) => a.userName.length - b.userName.length,
     },
     {
-      title: "Mobile",
+      title: "Mobile Number",
       dataIndex: "mobile",
       sorter: (a, b) => a.mobile.length - b.mobile.length,
     },
     {
-      title: "Email",
+      title: "Email Id",
       dataIndex: "email",
       sorter: (a, b) => a.email.length - b.email.length,
     },

@@ -2,6 +2,13 @@
 /***** custom values *****/
 /***** Grid Values *****/
 /** Extends **/
+.enlarge-hover {
+  transition: transform 0.3s ease;
+}
+
+.enlarge-hover:hover {
+  transform: scale(1.2); /* Change the scale value as needed for desired enlargement */
+}
 /* ------------loader by me------------- */
 
 .loader-box {
@@ -4638,7 +4645,8 @@ span.select2-container.select2-container--default.select2-container--open {
   background-color: transparent;
   border-right: 1px solid transparent;
   margin-top: 0;
-  z-index: 1001;
+  z-index: 0;
+  /* z-index: 1001; */
   position: fixed;
   top: 60px;
   bottom: 0;

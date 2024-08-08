@@ -16,7 +16,7 @@ function ReactLoader(props) {
         aria-label="Loading Spinner"
         data-testid="loader" 
         />
-        <p>Loading ...</p>
+        <p>Loading...</p>
         </div>
         </div>
 

@@ -6,6 +6,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 import FeatherIcon from "feather-icons-react";
+import { MdOutlinePinDrop } from "react-icons/md";
+import { TbTruckDelivery } from "react-icons/tb";
+import { MdOutlineAssignmentTurnedIn } from "react-icons/md";
+import { LiaFileInvoiceSolid } from "react-icons/lia";
+import { SiPivotaltracker } from "react-icons/si";
 
 const Sidebar = () => {
   const [isSideMenu, setSideMenu] = useState("");
@@ -249,8 +254,10 @@ const Sidebar = () => {
                         }
                         to="/delivery/sales/sales-invioce"
                       >
-                        <i data-feather="shopping-cart" />
-                        <FeatherIcon icon="shopping-cart" />
+                        {/* <i data-feather="sales-invoice" />
+                        <FeatherIcon icon="sales-invoice" /> */}
+                        <LiaFileInvoiceSolid size={30}/>
+
                         <span>Invoice</span>
                       </Link>
                     </li>
@@ -337,8 +344,9 @@ const Sidebar = () => {
                         }
                         to="/delivery/transaction/assign_to"
                       >
-                        <i data-feather="shopping-cart" />
-                        <FeatherIcon icon="shopping-cart" />
+                        {/* <i data-feather="shopping-cart" />
+                        <FeatherIcon icon="shopping-cart" /> */}
+                        <MdOutlineAssignmentTurnedIn size={30}/>
                         <span>Assign Delivery</span>
                       </Link>
                     </li>
@@ -351,9 +359,25 @@ const Sidebar = () => {
                         }
                         to="/delivery/transaction/assign_List"
                       >
-                        <i data-feather="shopping-cart" />
-                        <FeatherIcon icon="shopping-cart" />
+                        {/* <i data-feather="shopping-cart" />
+                        <FeatherIcon icon="shopping-cart" /> */}
+                        <TbTruckDelivery size={30}/>
                         <span>Delivery List</span>
+                      </Link>
+                    </li>
+                    <li
+                      className={pathname.includes("drop_List") ? "active" : ""}
+                    >
+                      <Link
+                        className={
+                          pathname.includes("drop_List") ? "active" : ""
+                        }
+                        to="/delivery/transaction/drop_List"
+                      >
+                        {/* <i data-feather="shopping-cart" />
+                        <FeatherIcon icon="shopping-cart" /> */}
+                        <MdOutlinePinDrop size={30}/>
+                        <span>Transport Delivery</span>
                       </Link>
                     </li>
                    
@@ -371,8 +395,8 @@ const Sidebar = () => {
                         }
                         to="/delivery/tracking/tracking"
                       >
-                        <i data-feather="shopping-cart" />
-                        <FeatherIcon icon="shopping-cart" />
+                       <SiPivotaltracker size={30}/>
+
                         <span>Driver Tracker</span>
                       </Link>
                     </li>
@@ -537,10 +561,10 @@ const Sidebar = () => {
                         }
                       >
                         <FeatherIcon icon="bar-chart" />
-                        <span>Deliveryday Report</span>
+                        <span>Delivery day Report</span>
                       </Link>
                     </li>
-                    <li
+                    {/* <li
                       className={
                         pathname.includes("report/2") ? "active" : ""
                       }
@@ -554,7 +578,7 @@ const Sidebar = () => {
                         <FeatherIcon icon="bar-chart" />
                         <span>Delivery Report</span>
                       </Link>
-                    </li>
+                    </li> */}
                     <li
                       className={
                         pathname.includes("report/6") ? "active" : ""
@@ -613,6 +637,36 @@ const Sidebar = () => {
                       >
                         <FeatherIcon icon="bar-chart" />
                         <span>Trip Report</span>
+                      </Link>
+                    </li>
+                    <li
+                      className={
+                        pathname.includes("report/7") ? "active" : ""
+                      }
+                    >
+                      <Link
+                        to="/delivery/report/report/7"
+                        className={
+                          pathname.includes("report/7") ? "active" : ""
+                        }
+                      >
+                        <FeatherIcon icon="bar-chart" />
+                        <span>Order Image</span>
+                      </Link>
+                    </li>
+                    <li
+                      className={
+                        pathname.includes("report/8") ? "active" : ""
+                      }
+                    >
+                      <Link
+                        to="/delivery/report/report/8"
+                        className={
+                          pathname.includes("report/8") ? "active" : ""
+                        }
+                      >
+                        <FeatherIcon icon="bar-chart" />
+                        <span>Vehicle Status</span>
                       </Link>
                     </li>
                   </ul>
@@ -715,6 +769,30 @@ const Sidebar = () => {
                               }
                             >
                               General Settings
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/delivery/settings/whatsapp_config"
+                              className={
+                                pathname.includes("whatsapp_config")
+                                  ? "active"
+                                  : ""
+                              }
+                            >
+                              WhatsApp Config.
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/delivery/settings/otp_config"
+                              className={
+                                pathname.includes("otp_config")
+                                  ? "active"
+                                  : ""
+                              }
+                            >
+                              OTP Config.
                             </Link>
                           </li>
                           

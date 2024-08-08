@@ -73,10 +73,18 @@ const selectHandler =(selected)=>{
           alert(err);
         }
       };
+      const isVehicleNumberValid = (vehicleNumber) => {
+        const vehicleNumberRegex = /^[A-Z]{2}\d{2}[A-Z]{2}\d{4}$/;
+        return vehicleNumberRegex.test(vehicleNumber);
+      };
 
 // ========================================save-data===================================
       const saveHandler = async (e) => {
         e.preventDefault();
+        if (!isVehicleNumberValid(Name)) {
+          showToastError('Please enter a valid vehicle number.');
+          return;
+        }
         const urlSavevehicle = "/api/SaveVechicle?";
         // console.log('codeUsers', code)
         var body = {
@@ -90,7 +98,7 @@ const selectHandler =(selected)=>{
           ? parseInt(selectedTransport.value)
           : 0,
           TransportName :values.transport === 1 && selectedTransport != null ? selectedTransport.label:'',
-          ImgPath:"",
+          ImgPath:imagePath,
           ImgExt:''
         };
         // console.log("url", urlSaveDep);
@@ -138,7 +146,7 @@ const selectHandler =(selected)=>{
               VechicleModel:list.vechicleModel,
              
             })
-            setInitialValue(list.transporter)
+            setInitialValue({transport:list.transporter})
             setSelectedTransport({value:list.transportCode, label:list.transportName})
             setValues({transport:list.transporter})
             // setMasterType(131003)

@@ -35,9 +35,9 @@ const NewUserPage = (props) => {
               <div className="col-lg-3 col-sm-6 col-12">
                 
                 <InputField star="*" labelName='User Name' name="UserName" type="text" value={UserName} onChange={props.handleInputField} required/>
-                <InputField star="*" labelName='Email' name="Email" type="email" value={Email} onChange={props.handleInputField} required/>
+                <InputField star="*" labelName='Email Id' name="Email" type="email" value={Email} onChange={props.handleInputField} required/>
                 <div className="form-group">
-                  <label>Password</label>
+                  <label>Password <span className='text-danger'>*</span></label>
                   <div className="pass-group">
                     <input
                       type={props.passwordShown ? "text" : "password"}
@@ -45,6 +45,7 @@ const NewUserPage = (props) => {
                       name="Password"
                       value={Password}
                       onChange={props.handleInputField}
+                      required
                     />
                     <span
                       className={`fas toggle-password ${
@@ -56,8 +57,8 @@ const NewUserPage = (props) => {
                 </div>
               </div>
               <div className="col-lg-3 col-sm-6 col-12">
-                <InputField star="*" labelName="Mobile" name="Mobile" type="number" value={Mobile} onChange={props.handleInputField} required/>
-                <InputSelect label="Role" options={props.roleList} value={props.selectedRole} onChange={props.selectHandler}/>
+                <InputField star="*" labelName="Mobile Number" name="Mobile" type="tel" value={Mobile} maxLength="10" pattern="[0-9]*" onChange={props.handleInputField} required/>
+                <InputSelect star="*" label="Role" options={props.roleList} value={props.selectedRole} onChange={props.selectHandler} required/>
                 
                 {/* <div className="form-group mt-1">
                   <label>Confirm Password</label>

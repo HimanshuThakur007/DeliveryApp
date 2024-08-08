@@ -132,13 +132,13 @@ const Header = (props) => {
           onMouseOver={expandMenuOpen}
         >
           <Link to="/delivery/dashboard" className="logo logo-normal">
-            <img src={sLogo} alt="" />
+            <img src={sLogo} alt=""/>
           </Link>
           <Link to="/delivery/dashboard" className="logo logo-white">
             <img src={LogoWhite} alt="" />
           </Link>
           <Link to="/delivery/dashboard" className="logo-small">
-            <img src={SmallLogo} alt="" />
+            <img src={sLogo} alt="" />
           </Link>
           <Link
             id="toggle_btn"
@@ -172,7 +172,7 @@ const Header = (props) => {
         <ul className="nav user-menu">
           {/* Search */}
           <li className="nav-item nav-searchinputs">
-            <div className="top-nav-search">
+            {/* <div className="top-nav-search">
               <Link to="#" className="responsive-search">
                 <i className="fa fa-search" />
               </Link>
@@ -181,14 +181,14 @@ const Header = (props) => {
                   <input type="text" placeholder="Search" />
                   <div className="search-addon">
                     <span>
-                      {/* <i data-feather="search" className="feather-14" /> */}
+                      
                       <FeatherIcon icon="search" className="feather-14" />
                     </span>
                   </div>
                 </div>
                               
               </form>
-            </div>
+            </div> */}
           </li>
           {/* /Search */}
 
@@ -206,151 +206,7 @@ const Header = (props) => {
           </li>
      
           {/* Notifications */}
-          <li className="nav-item dropdown nav-item-box">
-            <Link
-              to="#"
-              className="dropdown-toggle nav-link"
-              data-bs-toggle="dropdown"
-            >
-              {/* <i data-feather="bell" /> */}
-              <FeatherIcon icon="bell" />
-              <span className="badge rounded-pill">2</span>
-            </Link>
-            <div className="dropdown-menu notifications">
-              <div className="topnav-dropdown-header">
-                <span className="notification-title">Notifications</span>
-                <Link to="#" className="clear-noti">
-                  {" "}
-                  Clear All{" "}
-                </Link>
-              </div>
-              <div className="noti-content">
-                <ul className="notification-list">
-                  <li className="notification-message active">
-                    <Link to="/delivery/activities">
-                      <div className="media d-flex">
-                        <span className="avatar flex-shrink-0">
-                          <img alt="" src={Avatar2} />
-                        </span>
-                        <div className="media-body flex-grow-1">
-                          <p className="noti-details">
-                            <span className="noti-title">John Doe</span> added
-                            new task{" "}
-                            <span className="noti-title">
-                              Patient appointment booking
-                            </span>
-                          </p>
-                          <p className="noti-time">
-                            <span className="notification-time">
-                              4 mins ago
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li className="notification-message">
-                    <Link to="/delivery/activities">
-                      <div className="media d-flex">
-                        <span className="avatar flex-shrink-0">
-                          <img alt="" src={Avatar3} />
-                        </span>
-                        <div className="media-body flex-grow-1">
-                          <p className="noti-details">
-                            <span className="noti-title">Tarah Shropshire</span>{" "}
-                            changed the task name{" "}
-                            <span className="noti-title">
-                              Appointment booking with payment gateway
-                            </span>
-                          </p>
-                          <p className="noti-time">
-                            <span className="notification-time">
-                              6 mins ago
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li className="notification-message">
-                    <Link to="/delivery/activities">
-                      <div className="media d-flex">
-                        <span className="avatar flex-shrink-0">
-                          <img alt="" src={Avatar6} />
-                        </span>
-                        <div className="media-body flex-grow-1">
-                          <p className="noti-details">
-                            <span className="noti-title">Misty Tison</span>{" "}
-                            added{" "}
-                            <span className="noti-title">Domenic Houston</span>{" "}
-                            and <span className="noti-title">Claire Mapes</span>{" "}
-                            to project{" "}
-                            <span className="noti-title">
-                              Doctor available module
-                            </span>
-                          </p>
-                          <p className="noti-time">
-                            <span className="notification-time">
-                              8 mins ago
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li className="notification-message">
-                    <Link to="/delivery/activities">
-                      <div className="media d-flex">
-                        <span className="avatar flex-shrink-0">
-                          <img alt="" src={Avatar17} />
-                        </span>
-                        <div className="media-body flex-grow-1">
-                          <p className="noti-details">
-                            <span className="noti-title">Rolland Webber</span>{" "}
-                            completed task{" "}
-                            <span className="noti-title">
-                              Patient and Doctor video conferencing
-                            </span>
-                          </p>
-                          <p className="noti-time">
-                            <span className="notification-time">
-                              12 mins ago
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                  <li className="notification-message">
-                    <Link to="/delivery/activities">
-                      <div className="media d-flex">
-                        <span className="avatar flex-shrink-0">
-                          <img alt="" src={Avatar13} />
-                        </span>
-                        <div className="media-body flex-grow-1">
-                          <p className="noti-details">
-                            <span className="noti-title">Bernardo Galaviz</span>{" "}
-                            added new task{" "}
-                            <span className="noti-title">
-                              Private chat module
-                            </span>
-                          </p>
-                          <p className="noti-time">
-                            <span className="notification-time">
-                              2 days ago
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="topnav-dropdown-footer">
-                <Link to="/delivery/activities">View all Notifications</Link>
-              </div>
-            </div>
-          </li>
+       
         
           {/* <li className="nav-item nav-item-box">
             <Link to="/delivery/settings/generalsettings">

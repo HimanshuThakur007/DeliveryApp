@@ -4,25 +4,6 @@ import Table from "../../EntryFile/datatable";
 // import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  ClosesIcon,
-  Excel,
-  Filter,
-  Pdf,
-  Calendar,
-  Printer,
-  search_whites,
-  Search,
-  MacbookIcon,
-  OrangeImage,
-  PineappleImage,
-  StawberryImage,
-  AvocatImage,
-  Product1,
-  Product7,
-  Product8,
-  Product9,
-} from "../../EntryFile/imagePath";
 import InvoicePage from "./InvoicePage";
 import useFetch from "../../Hooks/useFetch";
 import { convertDate2 } from "../ReuseFunctions/ReuseFunction";
@@ -135,7 +116,7 @@ const handleValueChange = (id, newValue) => {
     {
       title: "Invoice number",
       dataIndex: "billNo",
-      sorter: (a, b) => a.Sku.length - b.Sku.length,
+      sorter: (a, b) => a.billNo.length - b.billNo.length,
     },
     {
       title: "Customer name",
@@ -150,12 +131,12 @@ const handleValueChange = (id, newValue) => {
     {
       title: "Quantity",
       dataIndex: "qty",
-      sorter: (a, b) => a.qty.length - b.qty.length,
+      sorter: (a, b) => a.qty - b.qty,
     },
     {
       title: "Amount",
       dataIndex: "amount",
-      sorter: (a, b) => a.amount.length - b.amount.length,
+      sorter: (a, b) => a.amount - b.amount,
     },
     // {
     //   title: "Paid",

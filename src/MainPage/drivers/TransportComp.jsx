@@ -26,12 +26,21 @@ console.log('receivedCode', receivedCode)
 
   const handleInputField = (e) => {
     const { name, value } = e.target;
-    setInputValue((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (name === "Mobile") {
+      const numericValue = value.replace(/\D/g, ''); // Remove non-numeric characters
+      setInputValue(prevState => ({
+        ...prevState,
+        [name]: numericValue.slice(0, 10) // Limit to 10 digits
+      }));
+    } else {
+      setInputValue(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
   const { Name, Address, Email, Mobile } = inputValue;
+  console.log("email",Email.length)
 
   const saveHandler = async (e) => {
     e.preventDefault();
@@ -46,9 +55,31 @@ console.log('receivedCode', receivedCode)
       Email,
       Mobile,
       Address ,
-      ImgPath:"",
+      ImgPath:imagePath,
       ImgExt:''
     };
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(Email.length > 1){
+      if (!emailRegex.test(Email)) {
+          showToastError('Please enter a valid email address.');
+          return;
+      }
+    }
+ 
+      // Mobile validation
+      const mobileRegex = /^\d{10}$/; // Assuming mobile number should be 10 digits
+      if (!mobileRegex.test(body.Mobile)) {
+        showToastError('Please enter a valid 10-digit mobile number.');
+        return;
+      }
+       // Name validation
+      const nameRegex = /^[a-zA-Z0-9 ]{2,}$/; // Minimum 2 characters, only letters, numbers, and spaces allowed
+      if (!nameRegex.test(body.Name)) {
+        showToastError('Name should be at least 2 characters long and should not contain special characters.');
+        return;
+      }
     // console.log("url", urlSaveDep);
     console.log("bodyjson", JSON.stringify(body));
     try {

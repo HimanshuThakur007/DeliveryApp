@@ -31,12 +31,12 @@ const TransportPage = (props) => {
               <div className="col-lg-3 col-sm-6 col-12">
                 
                 <InputField star="*" labelName='Name' type="text" name="Name" value={Name}  onChange={props.handleInputField} required/>
-                <InputField labelName='Email' type="email" name="Email" value={Email}  onChange={props.handleInputField}/>
+                <InputField labelName='Email Id' type="email" name="Email" value={Email}  onChange={props.handleInputField}/>
                 
               
               </div>
               <div className="col-lg-3 col-sm-6 col-12">
-                <InputField star="*" labelName="Mobile" type="number" name="Mobile" value={Mobile} onChange={props.handleInputField} required/>
+                <InputField star="*" labelName="Mobile Number" type="number" name="Mobile" value={Mobile} onChange={props.handleInputField} required/>
                 <InputTextArea textlbl="Address" name="Address" value={Address}  onChange={props.handleInputField}/>
                 {/* <div className="form-group">
                   <label>Password</label>

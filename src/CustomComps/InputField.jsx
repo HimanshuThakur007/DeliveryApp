@@ -8,6 +8,7 @@ const InputField = (props) => {
           <input
             type={props.type}
             name={props.name}
+            pattern={props.pattern}
             className="form-control"
             autoComplete="off"
             onChange={props.onChange}
@@ -18,7 +19,6 @@ const InputField = (props) => {
             required={props.required}
             disabled={props.disabled}
           />
-        {/* <div className="invalid-feedback">{props.errormsg}</div> */}
         <div className={props.errClass}><span className='text-danger'>{props.errormsg}</span></div>
       </div>
     </>
